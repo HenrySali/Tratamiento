@@ -245,6 +245,12 @@ def serve_processed(filename):
 
 
 if __name__ == '__main__':
-    logger.info("Iniciando servidor de Tratamiento de Audio...")
-    logger.info("Abre el navegador en: http://localhost:5000")
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    print("\n" + "="*70)
+    print("🎵 TRATAMIENTO - Audio Processor Web Interface")
+    print("="*70)
+    print("\n✅ Servidor iniciado!")
+    print("📱 Abre en tu navegador: http://localhost:5000")
+    print("💡 Presiona CTRL+C para detener el servidor\n")
+    print("="*70 + "\n")
+    
+    app.run(debug=False, host='0.0.0.0', port=5000, use_reloader=False)
