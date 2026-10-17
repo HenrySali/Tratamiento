@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tratamiento 🎵 - Procesamiento de Audio Avanzado</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🎵 Tratamiento</h1>
+                <p class="subtitle">Sistema Avanzado de Procesamiento de Audio</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Upload Section -->
+            <section class="upload-section card">
+                <div class="upload-header">
+                    <h2>📤 Subir Audio</h2>
+                    <p class="info-text">Formatos soportados: WAV, MP3, OGG, FLAC, M4A (máx 500MB)</p>
+                </div>
+
+                <div class="upload-area" id="uploadArea">
+                    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <h3>Arrastra tu archivo aquí</h3>
+                    <p>o</p>
+                    <label for="fileInput" class="file-btn">Selecciona archivo</label>
+                    <input type="file" id="fileInput" accept=".wav,.mp3,.ogg,.flac,.m4a" style="display: none;">
+                </div>
+
+                <div id="uploadProgress" class="upload-progress" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p id="progressText">Subiendo... 0%</p>
+                </div>
+
+                <!-- File Info -->
+                <div id="fileInfo" class="file-info" style="display: none;">
+                    <div class="file-details">
+                        <p><strong>Archivo:</strong> <span id="fileName"></span></p>
+                        <p><strong>Tamaño:</strong> <span id="fileSize"></span></p>
+                    </div>
+
+                    <!-- Language Selection -->
+                    <div class="language-select">
+                        <label for="languageSelect">Idioma para transcripción:</label>
+                        <select id="languageSelect">
+                            <option value="es">Español</option>
+                            <option value="en">Inglés</option>
+                            <option value="fr">Francés</option>
+                            <option value="de">Alemán</option>
+                            <option value="it">Italiano</option>
+                            <option value="pt">Portugués</option>
+                        </select>
+                    </div>
+
+                    <!-- Process Button -->
+                    <button id="processBtn" class="btn btn-primary btn-large">
+                        <span class="btn-icon">⚡</span>
+                        Procesar Audio
+                    </button>
+                </div>
+            </section>
+
+            <!-- Processing Status -->
+            <section id="statusSection" class="status-section card" style="display: none;">
+                <h2>⏳ Procesando...</h2>
+                <div class="status-bar">
+                    <div class="status-fill" id="statusFill"></div>
+                </div>
+                <p id="statusMessage">Iniciando...</p>
+                <ul class="process-steps">
+                    <li class="step" id="step1">
+                        <span class="step-icon">1</span>
+                        <span class="step-text">Cargando audio</span>
+                    </li>
+                    <li class="step" id="step2">
+                        <span class="step-icon">2</span>
+                        <span class="step-text">Reduciendo ruido</span>
+                    </li>
+                    <li class="step" id="step3">
+                        <span class="step-icon">3</span>
+                        <span class="step-text">Normalizando</span>
+                    </li>
+                    <li class="step" id="step4">
+                        <span class="step-icon">4</span>
+                        <span class="step-text">Mejorando presencia</span>
+                    </li>
+                    <li class="step" id="step5">
+                        <span class="step-icon">5</span>
+                        <span class="step-text">Transcribiendo</span>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Results Section -->
+            <section id="resultsSection" class="results-section card" style="display: none;">
+                <h2>✅ Procesamiento Completado</h2>
+                
+                <!-- Audio Player -->
+                <div class="audio-player">
+                    <h3>🔊 Audio Procesado</h3>
+                    <audio id="audioPlayer" controls>
+                        <source id="audioSource" type="audio/wav">
+                        Tu navegador no soporta el elemento audio.
+                    </audio>
+                </div>
+
+                <!-- Transcription -->
+                <div class="transcription">
+                    <h3>📝 Transcripción</h3>
+                    <div class="transcription-box" id="transcriptionBox"></div>
+                    <button id="copyBtn" class="btn btn-secondary">
+                        <span class="btn-icon">📋</span>
+                        Copiar Transcripción
+                    </button>
+                </div>
+
+                <!-- Download Buttons -->
+                <div class="download-section">
+                    <h3>⬇️ Descargar</h3>
+                    <div class="button-group">
+                        <button id="downloadAudioBtn" class="btn btn-secondary">
+                            <span class="btn-icon">🎵</span>
+                            Descargar Audio
+                        </button>
+                        <button id="downloadTranscriptBtn" class="btn btn-secondary">
+                            <span class="btn-icon">📄</span>
+                            Descargar Transcripción
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Process Another -->
+                <button id="processAnotherBtn" class="btn btn-primary">
+                    <span class="btn-icon">🔄</span>
+                    Procesar Otro Audio
+                </button>
+            </section>
+
+            <!-- Error Section -->
+            <section id="errorSection" class="error-section card" style="display: none;">
+                <h2>❌ Error</h2>
+                <p id="errorMessage"></p>
+                <button id="retryBtn" class="btn btn-primary">
+                    <span class="btn-icon">🔄</span>
+                    Intentar de Nuevo
+                </button>
+            </section>
+
+            <!-- Info Cards -->
+            <section class="info-section">
+                <div class="info-card">
+                    <h3>🔊 Reducción de Ruido</h3>
+                    <p>Tecnología neuronal que elimina ruido de fondo preservando la voz natural</p>
+                </div>
+                <div class="info-card">
+                    <h3>📈 Normalización Dinámica</h3>
+                    <p>Amplificación inteligente sin saturación, adaptada a cada audio</p>
+                </div>
+                <div class="info-card">
+                    <h3>🎯 Whisper AI</h3>
+                    <p>Transcripción automática de OpenAI con soporte para múltiples idiomas</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Tratamiento - Sistema Avanzado de Procesamiento de Audio</p>
+            <p>Powered by PyTorch, Librosa, Whisper y Demucs</p>
+        </footer>
+    </div>
+
+    <script src="../static/script.js"></script>
+</body>
+</html>
