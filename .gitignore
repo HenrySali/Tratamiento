@@ -1,0 +1,44 @@
+# Entorno virtual
+venv/
+ENV/
+env/
+
+# Archivos de audio procesados
+processed_audio/
+demucs_output/
+
+# Archivos temporales de audio
+*.wav
+*.mp3
+*.ogg
+*.flac
+*.m4a
+test_audio.wav
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Modelos descargados
+.cache/
+models/
+
+# Logs
+*.log
